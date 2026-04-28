@@ -1,10 +1,15 @@
 import Hero from "@/components/Hero";
 import Counter from "@/components/Counter";
-export default function Home() {
+import Friends from "@/components/Friends";
+export default async function Home() {
+  const friends = await fetch("http://localhost:3000/friends.json").then(
+    (res) => res.json(),
+  );
   return (
     <main className="">
       <Hero />
       <Counter />
+      <Friends friends={friends} />
     </main>
   );
 }
