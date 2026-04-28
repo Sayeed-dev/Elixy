@@ -7,7 +7,7 @@ import {
   Trash2,
   RotateCcw,
 } from "lucide-react";
-import Image from "next/image";
+import { FaCircleUser } from "react-icons/fa6";
 
 const recentInteractions = [
   {
@@ -36,7 +36,7 @@ const recentInteractions = [
   },
 ];
 
-export default function ContactProfile() {
+export default function ContactProfile({ friend }) {
   return (
     <div className="min-h-screen bg-gray-50 p-6 flex items-start justify-center">
       <div className="w-full max-w-3xl grid grid-cols-3 gap-4">
@@ -44,26 +44,20 @@ export default function ContactProfile() {
         <div className="col-span-1 flex flex-col gap-4">
           {/* Profile Card */}
           <div className="bg-white rounded-2xl p-5 flex flex-col items-center text-center shadow-sm border border-gray-100">
-            <Image
-              src="https://i.pravatar.cc/80?img=47"
-              alt="Emma Wilson"
-              className="w-20 h-20 rounded-full object-cover mb-3"
-            />
-            <h2 className="font-semibold text-gray-900 text-base">
-              Emma Wilson
+            <span className="text-7xl">
+              <FaCircleUser />
+            </span>
+            <h2 className="font-semibold text-gray-900 text-base mt-2">
+              {friend.name}
             </h2>
             <div className="flex gap-2 mt-2 mb-3">
-              <span className="bg-red-500 text-white text-xs font-medium px-2 py-0.5 rounded-full">
-                Overdue
+              <span className="bg-gray-800 text-white text-xs font-medium px-2 py-0.5 rounded-full">
+                {friend.status}
               </span>
               <span className="bg-green-100 text-green-700 text-xs font-medium px-2 py-0.5 rounded-full">
-                FAMILY
+                {friend.category}
               </span>
             </div>
-            <p className="text-gray-400 text-xs italic mb-1">
-              Former colleague, great mentor
-            </p>
-            <p className="text-gray-400 text-xs">Preferred: email</p>
           </div>
 
           {/* Action Buttons */}
@@ -135,39 +129,6 @@ export default function ContactProfile() {
                   <Icon size={20} className="text-gray-500" />
                   {label}
                 </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Recent Interactions */}
-          <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-semibold text-gray-800">
-                Recent Interactions
-              </h3>
-              <button className="flex items-center gap-1 text-xs text-gray-500 hover:text-gray-700 transition-colors">
-                <RotateCcw size={12} />
-                Full History
-              </button>
-            </div>
-            <div className="flex flex-col divide-y divide-gray-50">
-              {recentInteractions.map((item, idx) => (
-                <div key={idx} className="flex items-center gap-3 py-3">
-                  <div className="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center shrink-0">
-                    <item.icon size={15} className="text-gray-400" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-gray-800">
-                      {item.type}
-                    </p>
-                    <p className="text-xs text-gray-400 truncate">
-                      {item.note}
-                    </p>
-                  </div>
-                  <span className="text-xs text-gray-400 shrink-0">
-                    {item.date}
-                  </span>
-                </div>
               ))}
             </div>
           </div>

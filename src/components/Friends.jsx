@@ -16,10 +16,6 @@ const Friends = ({ friends }) => {
                 <h3>{friend.name}</h3>
                 <h4 className="text-gray-600">{friend.time}</h4>
 
-                {friend.category.map((category, index) => (
-                  <p className="mt-0 p-2 bg-blue-100 rounded-2xl" key={index}>{category}</p>
-                ))}
-
                 {friend.status === "Almost Due" ? (
                   <p className="text-yellow-500 font-bold mt-0">Almost Due</p>
                 ) : friend.status === "Overdue" ? (
