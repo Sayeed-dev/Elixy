@@ -14,7 +14,9 @@ const Friends = ({ friends }) => {
                   <FaCircleUser />
                 </span>
                 <h3>{friend.name}</h3>
-                <h4 className="text-gray-600">{friend.days_since_contact} days</h4>
+                <h4 className="text-gray-600">
+                  {friend.days_since_contact} days
+                </h4>
                 <p className="mt-0 p-2 bg-blue-200 rounded-xl">{friend.tags}</p>
                 {friend.status === "almost_due" ? (
                   <p className="text-yellow-500 font-bold mt-0">Almost Due</p>
