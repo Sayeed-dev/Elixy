@@ -4,7 +4,7 @@ import Friends from "@/components/Friends";
 
 
 export default async function Home() {
-  const friends = await fetch("/public/friends.json").then(
+  const friends = await fetch("../../public/friends.json").then(
     (res) => res.json(),
   );
   return (
