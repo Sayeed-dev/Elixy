@@ -1,3 +1,5 @@
+'use client';
+import { useLogs } from "@/context/logContext";
 import {
   PhoneCall,
   MessageSquare,
@@ -5,38 +7,23 @@ import {
   Clock,
   Archive,
   Trash2,
-  RotateCcw,
 } from "lucide-react";
 import { FaCircleUser } from "react-icons/fa6";
 
-const recentInteractions = [
-  {
-    type: "Text",
-    icon: MessageSquare,
-    note: "Asked for career advice",
-    date: "Jan 28, 2026",
-  },
-  {
-    type: "Meetup",
-    icon: PhoneCall,
-    note: "Industry conference meetup",
-    date: "Jan 28, 2026",
-  },
-  {
-    type: "Video",
-    icon: Video,
-    note: "Asked for career advice",
-    date: "Jan 28, 2026",
-  },
-  {
-    type: "Text",
-    icon: MessageSquare,
-    note: "Asked for career advice",
-    date: "Jan 28, 2026",
-  },
-];
-
 export default function ContactProfile({ friend }) {
+  const { addLog } = useLogs();
+
+  const handleAction = (type) => {
+    const newLog = {
+      friendName: friend.name,
+      type: type,
+      date: new Date().toLocaleDateString(),
+      note: `Checked in via ${type}`,
+    };
+
+    addLog(newLog); // কন্টাক্ট লগে ডাটা সেভ হলো
+    alert(`${type} log added!`);
+  };
   return (
     <div className="min-h-screen bg-gray-50 p-6 flex items-start justify-center">
       <div className="w-full max-w-3xl grid grid-cols-3 gap-4">
@@ -57,7 +44,9 @@ export default function ContactProfile({ friend }) {
               <span className="bg-green-100 text-green-700 text-xs font-medium px-2 py-0.5 rounded-full">
                 {friend.category}
               </span>
-              <p className="mt-0 py-1 px-2 bg-blue-200 rounded">{friend.tags}</p>
+              <p className="mt-0 py-1 px-2 bg-blue-200 rounded">
+                {friend.tags}
+              </p>
               <p className="mt-0 text-sm text-gray-500">{friend.email}</p>
             </div>
           </div>
@@ -84,7 +73,9 @@ export default function ContactProfile({ friend }) {
           {/* Stats Row */}
           <div className="grid grid-cols-3 gap-4">
             <div className="bg-white rounded-2xl p-4 text-center shadow-sm border border-gray-100">
-              <p className="text-2xl font-bold text-gray-900">{friend.days_since_contact}</p>
+              <p className="text-2xl font-bold text-gray-900">
+                {friend.days_since_contact}
+              </p>
               <p className="text-xs text-gray-400 mt-1">Days Since Contact</p>
             </div>
             <div className="bg-white rounded-2xl p-4 text-center shadow-sm border border-gray-100">
@@ -92,7 +83,9 @@ export default function ContactProfile({ friend }) {
               <p className="text-xs text-gray-400 mt-1">Goal (Days)</p>
             </div>
             <div className="bg-white rounded-2xl p-4 text-center shadow-sm border border-gray-100">
-              <p className="text-2xl font-bold text-green-700">{friend.next_due_date}</p>
+              <p className="text-2xl font-bold text-green-700">
+                {friend.next_due_date}
+              </p>
               <p className="text-xs text-gray-400 mt-1">Next Due</p>
             </div>
           </div>
@@ -109,7 +102,9 @@ export default function ContactProfile({ friend }) {
             </div>
             <p className="text-sm text-gray-600">
               Connect every{" "}
-              <span className="font-semibold text-gray-900">{friend.goal} days</span>
+              <span className="font-semibold text-gray-900">
+                {friend.goal} days
+              </span>
             </p>
           </div>
 
@@ -125,6 +120,7 @@ export default function ContactProfile({ friend }) {
                 { label: "Video", Icon: Video },
               ].map(({ label, Icon }) => (
                 <button
+                  onClick={() => handleAction(label)}
                   key={label}
                   className="flex flex-col items-center gap-2 py-4 rounded-xl border border-gray-100 hover:bg-gray-50 transition-colors text-gray-600 text-sm"
                 >
