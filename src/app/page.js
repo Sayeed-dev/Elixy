@@ -1,6 +1,8 @@
 import Hero from "@/components/Hero";
 import Counter from "@/components/Counter";
 import Friends from "@/components/Friends";
+
+
 export default async function Home() {
   const friends = await fetch("http://localhost:3000/friends.json").then(
     (res) => res.json(),

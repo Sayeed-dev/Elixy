@@ -4,6 +4,11 @@ import Footer from "../components/Footer.jsx";
 import { Poppins } from "next/font/google";
 import { LogProvider } from "@/context/logContext";
 
+export const metadata = {
+  title: " ELIXY",
+  description: "View your interaction statistics",
+};
+
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],

@@ -10,6 +10,8 @@ import {
 } from "lucide-react";
 import { FaCircleUser } from "react-icons/fa6";
 
+
+
 export default function ContactProfile({ friend }) {
   const { addLog } = useLogs();
 
