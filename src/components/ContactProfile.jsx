@@ -50,13 +50,15 @@ export default function ContactProfile({ friend }) {
             <h2 className="font-semibold text-gray-900 text-base mt-2">
               {friend.name}
             </h2>
-            <div className="flex gap-2 mt-2 mb-3">
+            <div className="flex gap-2 mt-2 mb-3 flex-col items-center">
               <span className="bg-gray-800 text-white text-xs font-medium px-2 py-0.5 rounded-full">
                 {friend.status}
               </span>
               <span className="bg-green-100 text-green-700 text-xs font-medium px-2 py-0.5 rounded-full">
                 {friend.category}
               </span>
+              <p className="mt-0 py-1 px-2 bg-blue-200 rounded">{friend.tags}</p>
+              <p className="mt-0 text-sm text-gray-500">{friend.email}</p>
             </div>
           </div>
 
@@ -82,15 +84,15 @@ export default function ContactProfile({ friend }) {
           {/* Stats Row */}
           <div className="grid grid-cols-3 gap-4">
             <div className="bg-white rounded-2xl p-4 text-center shadow-sm border border-gray-100">
-              <p className="text-2xl font-bold text-gray-900">62</p>
+              <p className="text-2xl font-bold text-gray-900">{friend.days_since_contact}</p>
               <p className="text-xs text-gray-400 mt-1">Days Since Contact</p>
             </div>
             <div className="bg-white rounded-2xl p-4 text-center shadow-sm border border-gray-100">
-              <p className="text-2xl font-bold text-gray-900">30</p>
+              <p className="text-2xl font-bold text-gray-900">{friend.goal}</p>
               <p className="text-xs text-gray-400 mt-1">Goal (Days)</p>
             </div>
             <div className="bg-white rounded-2xl p-4 text-center shadow-sm border border-gray-100">
-              <p className="text-2xl font-bold text-green-700">Feb 27, 2026</p>
+              <p className="text-2xl font-bold text-green-700">{friend.next_due_date}</p>
               <p className="text-xs text-gray-400 mt-1">Next Due</p>
             </div>
           </div>
@@ -107,7 +109,7 @@ export default function ContactProfile({ friend }) {
             </div>
             <p className="text-sm text-gray-600">
               Connect every{" "}
-              <span className="font-semibold text-gray-900">30 days</span>
+              <span className="font-semibold text-gray-900">{friend.goal} days</span>
             </p>
           </div>
 
