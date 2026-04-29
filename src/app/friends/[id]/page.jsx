@@ -4,7 +4,7 @@ import ContactProfile from "@/components/ContactProfile";
 const FriendDetailsPage = async ({ params }) => {
   const { id } = await params;
 
-  const friends = await fetch("http://localhost:3000/friends.json").then(
+  const friends = await fetch("/public/friends.json").then(
     (res) => res.json(),
   )
 
