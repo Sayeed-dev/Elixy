@@ -1,9 +1,10 @@
 import Hero from "@/components/Hero";
 import Counter from "@/components/Counter";
 import Friends from "@/components/Friends";
+import { getFriends } from "@/lib/friends";
 
 export default async function Home() {
-  const friends = await fetch("/friends.json").then((res) => res.json());
+  const friends = await getFriends();
   return (
     <main className="">
       <Hero />
