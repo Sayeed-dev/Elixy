@@ -1,5 +1,4 @@
 import ContactProfile from "@/components/ContactProfile";
-
 const FriendDetailsPage = async ({ params }) => {
   const { id } = await params;
 
