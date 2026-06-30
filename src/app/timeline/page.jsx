@@ -12,35 +12,38 @@ import {
 const iconMap = {
   Call: {
     icon: PhoneCall,
-    color: "bg-green-100 text-green-600 border-green-200",
+    color: "bg-blue-500/20 text-blue-300 border-blue-400/30",
   },
   Text: {
     icon: MessageSquare,
-    color: "bg-blue-100 text-blue-600 border-blue-200",
+    color: "bg-sky-500/20 text-sky-300 border-sky-400/30",
   },
   Video: {
     icon: Video,
-    color: "bg-purple-100 text-purple-600 border-purple-200",
+    color: "bg-blue-600/20 text-blue-200 border-blue-500/30",
   },
-  default: { icon: Clock, color: "bg-gray-100 text-gray-600 border-gray-200" },
+  default: {
+    icon: Clock,
+    color: "bg-blue-400/10 text-blue-200/70 border-blue-400/20",
+  },
 };
 
 export default function TimelinePage() {
   const { logs } = useLogs();
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] py-12 px-4 sm:px-6">
-      <div className="max-w-2xl mx-auto">
-        {/* Header Section */}
-        <div className="flex items-center gap-3 mb-10">
-          <div className="p-3 bg-white rounded-2xl shadow-sm border border-zinc-100">
-            <History className="text-zinc-800" size={24} />
+    <div className="page-shell">
+      <div className="container mx-auto max-w-2xl">
+        <div className="mb-10 flex items-center gap-4">
+          <div className="glass rounded-2xl p-3">
+            <History className="text-blue-300" size={24} />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-zinc-900 tracking-tight">
+            <p className="label-caps mb-1">Activity</p>
+            <h1 className="text-2xl font-bold tracking-tight text-white">
               Interaction Timeline
             </h1>
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm text-blue-200/60">
               Keep track of your meaningful connections
             </p>
           </div>
@@ -48,20 +51,20 @@ export default function TimelinePage() {
 
         <div className="relative">
           {logs.length === 0 ? (
-            <div className="text-center py-20 bg-white rounded-3xl border border-dashed border-zinc-200">
-              <div className="bg-zinc-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Clock className="text-zinc-300" size={30} />
+            <div className="glass-card rounded-3xl border-dashed py-20 text-center">
+              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-500/10">
+                <Clock className="text-blue-400/50" size={30} />
               </div>
-              <p className="text-zinc-500 font-medium">
+              <p className="font-medium text-blue-100/80">
                 No activity logs found yet.
               </p>
-              <p className="text-zinc-400 text-xs mt-1">
+              <p className="mt-1 text-xs text-blue-200/50">
                 Start a conversation to see it here!
               </p>
             </div>
           ) : (
             <div className="space-y-4">
-              <div className="absolute left-[27px] top-2 bottom-2 w-[2px] bg-zinc-100 hidden sm:block"></div>
+              <div className="absolute left-[27px] top-2 bottom-2 hidden w-[2px] bg-blue-400/20 sm:block" />
 
               {logs.map((log) => {
                 const config = iconMap[log.type] || iconMap.default;
@@ -70,31 +73,31 @@ export default function TimelinePage() {
                 return (
                   <div
                     key={log.id}
-                    className="relative flex items-start gap-4 group"
+                    className="group relative flex items-start gap-4"
                   >
                     <div
-                      className={`relative z-10 p-3 rounded-2xl border ${config.color} shadow-sm transition-transform group-hover:scale-110 duration-200`}
+                      className={`relative z-10 rounded-2xl border p-3 shadow-sm transition-transform duration-200 group-hover:scale-110 ${config.color}`}
                     >
                       <Icon size={20} />
                     </div>
 
-                    <div className="flex-1 bg-white p-5 rounded-2xl border border-zinc-100 shadow-sm hover:shadow-md transition-all duration-300 group-hover:border-zinc-200">
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div className="glass-card glass-card-hover flex-1 rounded-2xl p-5 transition-all duration-300">
+                      <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-center">
                         <div className="flex items-center gap-2">
-                          <span className="p-1 bg-zinc-50 rounded-full">
-                            <User size={12} className="text-zinc-400" />
+                          <span className="rounded-full bg-blue-500/10 p-1">
+                            <User size={12} className="text-blue-300/70" />
                           </span>
-                          <h3 className="font-bold text-zinc-800 tracking-tight">
+                          <h3 className="font-bold tracking-tight text-white">
                             {log.friendName}
                           </h3>
                         </div>
-                        <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 bg-zinc-50 px-2 py-1 rounded-md">
+                        <span className="rounded-md bg-blue-500/10 px-2 py-1 text-[10px] font-bold uppercase tracking-widest text-blue-300/60">
                           {log.date}
                         </span>
                       </div>
 
                       <div className="mt-2 flex items-center gap-2">
-                        <p className="text-sm text-zinc-600 leading-relaxed">
+                        <p className="text-sm leading-relaxed text-blue-100/70">
                           {log.note ||
                             `Had a ${log.type.toLowerCase()} interaction.`}
                         </p>

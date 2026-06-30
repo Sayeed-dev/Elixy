@@ -12,8 +12,16 @@ import {
 } from "lucide-react";
 import { FaCircleUser } from "react-icons/fa6";
 
+const statusStyles = {
+  almost_due: "bg-amber-400/15 text-amber-300 border-amber-400/25",
+  overdue: "bg-rose-400/15 text-rose-300 border-rose-400/25",
+  on_track: "bg-sky-400/15 text-sky-300 border-sky-400/25",
+};
+
 export default function ContactProfile({ friend }) {
   const { addLog } = useLogs();
+  const statusClass =
+    statusStyles[friend.status] ?? "bg-blue-500/15 text-blue-200 border-blue-400/25";
 
   const handleAction = (type) => {
     const newLog = {
@@ -32,37 +40,35 @@ export default function ContactProfile({ friend }) {
       pauseOnHover: true,
     });
   };
+
   return (
-    <div>
-      <ToastContainer />
-      <div className="min-h-screen bg-gray-50 p-6 flex items-start justify-center">
-        <div className="w-full max-w-3xl grid grid-cols-3 gap-4">
+    <div className="page-shell">
+      <ToastContainer theme="dark" />
+      <div className="container mx-auto flex max-w-5xl items-start justify-center">
+        <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8">
           {/* Left Column */}
-          <div className="col-span-1 flex flex-col gap-4">
-            {/* Profile Card */}
-            <div className="bg-white rounded-2xl p-5 flex flex-col items-center text-center shadow-sm border border-gray-100">
-              <span className="text-7xl">
+          <div className="flex flex-col gap-6 lg:col-span-1">
+            <div className="glass-card flex flex-col items-center rounded-2xl p-8 text-center">
+              <span className="text-7xl text-blue-300/80">
                 <FaCircleUser />
               </span>
-              <h2 className="font-semibold text-gray-900 text-base mt-2">
+              <h2 className="mt-4 text-lg font-semibold text-white">
                 {friend.name}
               </h2>
-              <div className="flex gap-2 mt-2 mb-3 flex-col items-center">
-                <span className="bg-gray-800 text-white text-xs font-medium px-2 py-0.5 rounded-full">
-                  {friend.status}
+              <div className="mt-4 flex flex-col items-center gap-3">
+                <span
+                  className={`rounded-full border px-3 py-1 text-xs font-medium capitalize ${statusClass}`}
+                >
+                  {friend.status?.replace("_", " ")}
                 </span>
-                <span className="bg-green-100 text-green-700 text-xs font-medium px-2 py-0.5 rounded-full">
-                  {friend.category}
-                </span>
-                <p className="mt-0 py-1 px-2 bg-blue-200 rounded">
+                <span className="rounded-full border border-blue-400/25 bg-blue-500/10 px-3 py-1 text-xs font-medium uppercase tracking-wide text-blue-300">
                   {friend.tags}
-                </p>
-                <p className="mt-0 text-sm text-gray-500">{friend.email}</p>
+                </span>
+                <p className="text-sm text-blue-200/60">{friend.email}</p>
               </div>
             </div>
 
-            {/* Action Buttons */}
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden divide-y divide-gray-100">
+            <div className="glass-card overflow-hidden divide-y divide-blue-400/10 rounded-2xl">
               <button
                 onClick={() =>
                   toast.warning("Snoozed for 2 weeks!", {
@@ -70,9 +76,9 @@ export default function ContactProfile({ friend }) {
                     autoClose: 3000,
                   })
                 }
-                className="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                className="flex w-full items-center gap-3 px-5 py-4 text-sm text-blue-100/80 transition-colors hover:bg-blue-400/10"
               >
-                <Clock size={15} className="text-gray-500" />
+                <Clock size={15} className="text-blue-300/70" />
                 Snooze 2 Weeks
               </button>
               <button
@@ -82,9 +88,9 @@ export default function ContactProfile({ friend }) {
                     autoClose: 3000,
                   })
                 }
-                className="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                className="flex w-full items-center gap-3 px-5 py-4 text-sm text-blue-100/80 transition-colors hover:bg-blue-400/10"
               >
-                <Archive size={15} className="text-gray-500" />
+                <Archive size={15} className="text-blue-300/70" />
                 Archive
               </button>
               <button
@@ -94,41 +100,40 @@ export default function ContactProfile({ friend }) {
                     autoClose: 3000,
                   })
                 }
-                className="w-full flex items-center gap-3 px-4 py-3 text-sm text-red-500 hover:bg-red-50 transition-colors"
+                className="flex w-full items-center gap-3 px-5 py-4 text-sm text-rose-300 transition-colors hover:bg-rose-400/10"
               >
-                <Trash2 size={15} className="text-red-400" />
+                <Trash2 size={15} className="text-rose-400" />
                 Delete
               </button>
             </div>
           </div>
 
           {/* Right Column */}
-          <div className="col-span-2 flex flex-col gap-4">
-            {/* Stats Row */}
-            <div className="grid grid-cols-3 gap-4">
-              <div className="bg-white rounded-2xl p-4 text-center shadow-sm border border-gray-100">
-                <p className="text-2xl font-bold text-gray-900">
+          <div className="flex flex-col gap-6 lg:col-span-2">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
+              <div className="glass-card rounded-2xl p-6 text-center">
+                <p className="text-3xl font-bold text-white">
                   {friend.days_since_contact}
                 </p>
-                <p className="text-xs text-gray-400 mt-1">Days Since Contact</p>
-              </div>
-              <div className="bg-white rounded-2xl p-4 text-center shadow-sm border border-gray-100">
-                <p className="text-2xl font-bold text-gray-900">
-                  {friend.goal}
+                <p className="mt-2 text-xs text-blue-200/50">
+                  Days Since Contact
                 </p>
-                <p className="text-xs text-gray-400 mt-1">Goal (Days)</p>
               </div>
-              <div className="bg-white rounded-2xl p-4 text-center shadow-sm border border-gray-100">
-                <p className="text-2xl font-bold text-green-700">
+              <div className="glass-card rounded-2xl p-6 text-center">
+                <p className="text-3xl font-bold text-white">{friend.goal}</p>
+                <p className="mt-2 text-xs text-blue-200/50">Goal (Days)</p>
+              </div>
+              <div className="glass-card rounded-2xl p-6 text-center">
+                <p className="text-3xl font-bold text-blue-300">
                   {friend.next_due_date}
                 </p>
-                <p className="text-xs text-gray-400 mt-1">Next Due</p>
+                <p className="mt-2 text-xs text-blue-200/50">Next Due</p>
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
-              <div className="flex items-center justify-between mb-2">
-                <h3 className="text-sm font-semibold text-gray-800">
+            <div className="glass-card rounded-2xl p-6 sm:p-8">
+              <div className="mb-3 flex items-center justify-between">
+                <h3 className="text-sm font-semibold text-white">
                   Relationship Goal
                 </h3>
                 <button
@@ -138,25 +143,24 @@ export default function ContactProfile({ friend }) {
                       autoClose: 3000,
                     })
                   }
-                  className="text-xs text-gray-500 border border-gray-200 px-3 py-1 rounded-lg hover:bg-gray-50 transition-colors"
+                  className="btn-royal-outline px-3 py-1.5 text-xs"
                 >
                   Edit
                 </button>
               </div>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-blue-100/70">
                 Connect every{" "}
-                <span className="font-semibold text-gray-900">
+                <span className="font-semibold text-blue-200">
                   {friend.goal} days
                 </span>
               </p>
             </div>
 
-            {/* Quick Check-In */}
-            <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
-              <h3 className="text-sm font-semibold text-gray-800 mb-4">
+            <div className="glass-card rounded-2xl p-6 sm:p-8">
+              <h3 className="mb-5 text-sm font-semibold text-white">
                 Quick Check-In
               </h3>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-3 gap-4">
                 {[
                   { label: "Call", Icon: PhoneCall },
                   { label: "Text", Icon: MessageSquare },
@@ -165,9 +169,9 @@ export default function ContactProfile({ friend }) {
                   <button
                     onClick={() => handleAction(label)}
                     key={label}
-                    className="flex flex-col items-center gap-2 py-4 rounded-xl border border-gray-100 hover:bg-gray-50 transition-colors text-gray-600 text-sm"
+                    className="glass-card-hover flex flex-col items-center gap-2 rounded-xl border border-blue-400/15 py-5 text-sm text-blue-100/80 transition-colors hover:bg-blue-400/10"
                   >
-                    <Icon size={20} className="text-gray-500" />
+                    <Icon size={20} className="text-blue-300" />
                     {label}
                   </button>
                 ))}

@@ -22,10 +22,14 @@ const Header = () => {
         <li key={link.href}>
           <Link
             href={link.href}
-            className={isActive ? "bg-gray-800 text-white" : ""}
+            className={`flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-medium transition ${
+              isActive
+                ? "border border-blue-400/30 bg-blue-500/20 text-blue-200"
+                : "text-blue-100/70 hover:bg-blue-400/10 hover:text-white"
+            }`}
           >
             {link.icon}
-            <span className="ml-1">{link.name}</span>
+            <span>{link.name}</span>
           </Link>
         </li>
       );
@@ -33,11 +37,11 @@ const Header = () => {
   };
 
   return (
-    <div className=" bg-gray-200 sticky top-0 z-10 shadow-xl">
-      <div className="navbar container mx-auto justify-between">
+    <header className="sticky top-0 z-50 border-b border-blue-400/15 bg-[#061224]/80 backdrop-blur-xl">
+      <div className="navbar container mx-auto max-w-7xl justify-between px-6 sm:px-10 lg:px-16 py-2">
         <div className="navbar-start">
           <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            <div tabIndex={0} role="button" className="btn btn-ghost text-blue-100 lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -45,29 +49,33 @@ const Header = () => {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >
-                {" "}
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
                   d="M4 6h16M4 12h8m-8 6h16"
-                />{" "}
+                />
               </svg>
             </div>
             <ul
               tabIndex="-1"
-              className="menu menu-compact dropdown-content bg-base-100 z-1 mt-3 w-52 p-2 shadow"
+              className="menu menu-compact dropdown-content glass z-50 mt-3 w-52 rounded-xl p-3"
             >
               {RenderedNavLinks()}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">ELIXY</a>
+          <Link
+            href="/"
+            className="text-xl font-bold tracking-tight text-white transition hover:text-blue-300"
+          >
+            ELIXY
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 gap-3">{RenderedNavLinks()}</ul>
+          <ul className="menu menu-horizontal gap-2 px-1">{RenderedNavLinks()}</ul>
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 

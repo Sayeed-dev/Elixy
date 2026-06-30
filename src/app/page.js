@@ -6,7 +6,7 @@ import { getFriends } from "@/lib/friends";
 export default async function Home() {
   const friends = await getFriends();
   return (
-    <main className="">
+    <main className="overflow-x-hidden">
       <Hero />
       <Counter />
       <Friends friends={friends} />

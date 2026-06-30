@@ -2,13 +2,12 @@
 @plugin "daisyui";
 
 @layer base {
-  /* ১. স্মুথ স্ক্রলিং এবং বেসিক বডি স্টাইল */
   html {
     scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-zinc-50 text-zinc-900 antialiased;
+    @apply bg-[#061224] text-blue-50 antialiased;
   }
 
   h1 {
@@ -28,12 +27,71 @@
   }
 
   p {
-    @apply leading-7 [&:not(:first-child)]:mt-6;
+    @apply leading-7;
   }
-
-
 
   button {
     @apply cursor-pointer disabled:cursor-not-allowed disabled:opacity-50;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-blue-400/10 backdrop-blur-xl border border-blue-300/20 shadow-[0_8px_32px_rgba(6,18,36,0.45)];
+  }
+
+  .glass-card {
+    @apply bg-blue-950/40 backdrop-blur-md border border-blue-400/15 shadow-[0_4px_24px_rgba(6,18,36,0.35)];
+  }
+
+  .glass-card-hover {
+    @apply transition-all duration-300 hover:bg-blue-400/10 hover:border-blue-300/25 hover:shadow-[0_8px_32px_rgba(37,99,235,0.2)];
+  }
+
+  .mesh-gradient {
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 40%, rgba(37, 99, 235, 0.22), transparent),
+      radial-gradient(ellipse 60% 40% at 80% 20%, rgba(59, 130, 246, 0.16), transparent),
+      radial-gradient(ellipse 50% 60% at 60% 80%, rgba(30, 64, 175, 0.18), transparent),
+      linear-gradient(to bottom, #061224, #0c2461 50%, #061224);
+  }
+
+  .grid-pattern {
+    background-image:
+      linear-gradient(rgba(147, 197, 253, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(147, 197, 253, 0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .page-shell {
+    @apply min-h-screen px-6 sm:px-10 lg:px-16 xl:px-24 py-12 lg:py-16;
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 40%, rgba(37, 99, 235, 0.22), transparent),
+      radial-gradient(ellipse 60% 40% at 80% 20%, rgba(59, 130, 246, 0.16), transparent),
+      radial-gradient(ellipse 50% 60% at 60% 80%, rgba(30, 64, 175, 0.18), transparent),
+      linear-gradient(to bottom, #061224, #0c2461 50%, #061224),
+      linear-gradient(rgba(147, 197, 253, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(147, 197, 253, 0.04) 1px, transparent 1px);
+    background-size: auto, auto, auto, auto, 48px 48px, 48px 48px;
+  }
+
+  .text-accent {
+    @apply text-blue-300;
+  }
+
+  .text-muted {
+    @apply text-blue-200/60;
+  }
+
+  .label-caps {
+    @apply text-xs font-semibold uppercase tracking-widest text-blue-400;
+  }
+
+  .btn-royal {
+    @apply rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-600/25 transition hover:shadow-blue-500/40;
+  }
+
+  .btn-royal-outline {
+    @apply rounded-xl border border-blue-400/25 bg-blue-400/5 px-6 py-3 text-sm font-semibold text-blue-100 backdrop-blur-sm transition hover:bg-blue-400/10;
   }
 }
